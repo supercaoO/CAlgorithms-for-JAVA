@@ -6,6 +6,7 @@ import com.caoO.algorithms.CMatrix;
 import com.caoO.algorithms.COut;
 
 public class Test {
+    private Test() {}
 
     @org.junit.Test
     public void test01() {

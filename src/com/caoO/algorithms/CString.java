@@ -33,4 +33,14 @@ public class CString {
         }
         return true;
     }
+
+    /**
+     * Return true if the two specified strings are circular rotation.
+     * @param str1 one string
+     * @param str2 another string
+     * @return result
+     */
+    public static boolean isCircularRotation(String str1, String str2) {
+        return (str1.length() == str2.length()) && (str1 + str1).indexOf(str2) > 0;
+    }
 }

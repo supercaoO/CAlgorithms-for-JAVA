@@ -43,11 +43,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
@@ -991,6 +987,17 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         else offscreen.fill(new Ellipse2D.Double(xs - scaledPenRadius/2, ys - scaledPenRadius/2,
                 scaledPenRadius, scaledPenRadius));
         draw();
+    }
+
+    /**
+     * Draws a point.
+     * The point is a filled circle whose radius is equal to the pen radius.
+     * To draw a single-pixel point, first set the pen radius to 0.
+     *
+     * @param point the point
+     */
+    public static void point(Point2D point) {
+        point(point.getX(), point.getY());
     }
 
     /**
