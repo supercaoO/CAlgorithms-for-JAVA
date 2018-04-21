@@ -6,8 +6,6 @@ import com.caoO.algorithms.CMatrix;
 import com.caoO.algorithms.COut;
 
 public class Test {
-    private Test() {}
-
     @org.junit.Test
     public void test01() {
         int i = CMath.abs(-1);
@@ -75,5 +73,30 @@ public class Test {
         int[][] arr1 = { {1, 2}, {1, 2}, {1, 2} };
         int[][] arr = CMatrix.transpose(arr1);
         COut.print2DArray(arr);
+    }
+
+    @org.junit.Test
+    public void test11() {
+        System.out.println((364 + 365 * 3) % 7);
+    }
+
+    @org.junit.Test
+    public void test12() {
+        System.out.println(742 % 7);
+    }
+
+    @org.junit.Test
+    public void test13() {
+        System.out.println(((364 + 365 * 3) * 4 + 364 + 365 + 1) % 7);
+    }
+
+    @org.junit.Test
+    public void test14() {
+        System.out.println(((366 + 365 * 3) * 4 + 366 + 365 + 1) % 7);
+    }
+
+    @org.junit.Test
+    public void test5() {
+        System.out.println(-11 % 7);
     }
 }

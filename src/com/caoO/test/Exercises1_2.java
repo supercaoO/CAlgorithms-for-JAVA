@@ -127,6 +127,12 @@ public class Exercises1_2 {
 
     @Test
     public void e11() {
+        SmartDate date = new SmartDate(1996, 2, 29);
+    }
 
+    @Test
+    public void e12() {
+        SmartDate date = new SmartDate(1999, 12, 31);
+        System.out.println(date.dayOfTheWeek());
     }
 }
