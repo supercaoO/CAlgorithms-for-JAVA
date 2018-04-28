@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<source-data>
+    <compress>
+        <rar>
+            <cmd>C:/Program Files/WinRAR/Rar.exe a </cmd>
+        </rar>
+        <sevenZ>
+            <cmd>C:/Program Files/2345Soft/HaoZip/HaoZipC a -t7z </cmd>
+        </sevenZ>
+        <zip>
+            <cmd>C:/Program Files/2345Soft/HaoZip/HaoZipC a -tzip </cmd>
+        </zip>
+    </compress>
+    <source-file>
+        <url>E:/</url>
+        <name>A.doc</name>
+    </source-file>
+</source-data>

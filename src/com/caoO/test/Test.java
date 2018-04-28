@@ -1,9 +1,13 @@
 package com.caoO.test;
 
-import com.caoO.algorithms.CArrays;
-import com.caoO.algorithms.CMath;
-import com.caoO.algorithms.CMatrix;
-import com.caoO.algorithms.COut;
+import com.caoO.algorithms.*;
+import com.caoO.utils.compress.Rar;
+import com.caoO.utils.compress.SevenZ;
+import com.caoO.utils.compress.Zip;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 public class Test {
     @org.junit.Test
@@ -98,5 +102,34 @@ public class Test {
     @org.junit.Test
     public void test5() {
         System.out.println(-11 % 7);
+    }
+
+    @org.junit.Test
+    public void test6() {
+        SevenZ.compress("B","E:/A.doc","E:/");
+        Zip.compress("C", "E:/B.7z", "E:/");
+        Rar.compress("D", "E:/B.7z", "E:/");
+        SevenZ.compress("E", "E:/B.7z", "E:/");
+    }
+
+    public static void main(String[] args) {
+        //加载dom树
+        Document doc = null;
+        try {
+            doc = new SAXReader().read("E:/IDEAworkspace/CAlgorithms for JAVA/srcdata.xml");
+            //获取节点
+            //List<Element> list = doc.selectNodes("/web-app/servlet/servlet-name");
+            //Element ele = list.get(0);
+            Element ele = (Element) doc.selectSingleNode("//compress-cmd/rar/url");
+            System.out.println(ele.getText());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @org.junit.Test
+    public void test7() {
+        System.out.println(Integer.toBinaryString(-1));
+        System.out.println(CInteger.toBinaryString(-1));
     }
 }
