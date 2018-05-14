@@ -63,6 +63,25 @@ public class SmartDate {
         this.day = day;
     }
 
+    private SmartDate(String smartDate) {
+        String[] dates = smartDate.split("/");
+        if (dates.length == 3) {
+            try {
+                int y = Integer.parseInt(dates[0]);
+                int m = Integer.parseInt(dates[1]);
+                int d = Integer.parseInt(dates[2]);
+                checkDateLegal(y, m, d);
+                this.year = y;
+                this.month = m;
+                this.day = d;
+            } catch (NumberFormatException e) {
+                throw new IllegalDateException();
+            }
+        } else {
+            throw new IllegalDateException();
+        }
+    }
+
     /**
      * Get the day of the week
      *
