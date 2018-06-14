@@ -1,6 +1,8 @@
 package com.caoO.test;
 
 import com.caoO.algorithms.*;
+import com.caoO.expression.ArithmeticalExpression;
+import com.caoO.std.StdOut;
 import com.caoO.utils.compress.Rar;
 import com.caoO.utils.compress.SevenZ;
 import com.caoO.utils.compress.Zip;
@@ -110,6 +112,18 @@ public class Test {
         Zip.compress("C", "E:/B.7z", "E:/");
         Rar.compress("D", "E:/B.7z", "E:/");
         SevenZ.compress("E", "E:/B.7z", "E:/");
+    }
+
+    @org.junit.Test
+    public void evaluateOfArithmeticalExpression() {
+        double result01 = ArithmeticalExpression.evaluate("( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )");
+        StdOut.println(result01);
+        double result02 = ArithmeticalExpression.evaluate("( ( 1 + sqrt ( 5.0 ) ) / 2.0 )");
+        StdOut.println(result02);
+        double result03 = ArithmeticalExpression.evaluate("(1+((2+3)*(4*5)))");
+        StdOut.println(result03);
+        double result04 = ArithmeticalExpression.evaluate("((1+sqrt(5.0))/2.0)");
+        StdOut.println(result04);
     }
 
     public static void main(String[] args) {
