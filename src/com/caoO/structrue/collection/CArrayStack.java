@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  *
  * @param <E>
  */
-public class Stack<E> implements Iterable<E> {
+public class CArrayStack<E> implements CQueue<E> {
 
     private Object[] elements;
 
@@ -19,21 +19,21 @@ public class Stack<E> implements Iterable<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
-     * Constructs an empty Stack with an initial capacity of ten.
+     * Constructs an empty CArrayStack with an initial capacity of ten.
      */
-    public Stack() {
+    public CArrayStack() {
         elements = new Object[DEFAULT_CAPACITY];
         cap = DEFAULT_CAPACITY;
     }
 
     /**
-     * Constructs an empty Stack with the specified initial capacity.
+     * Constructs an empty CArrayStack with the specified initial capacity.
      *
-     * @param  capacity  the initial capacity of the Stack
+     * @param  capacity  the initial capacity of the CArrayStack
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
      */
-    public Stack(int capacity) {
+    public CArrayStack(int capacity) {
         cap = capacity;
         if (cap > 0)
             elements = new Object[capacity];
@@ -44,10 +44,11 @@ public class Stack<E> implements Iterable<E> {
     }
 
     /**
-     * Pushes the specified element to the end of this Stack.
+     * Pushes the specified element to the end of this CArrayStack.
      *
-     * @param element element to be appended to this Stack
+     * @param element element to be appended to this CArrayStack
      */
+    @Override
     public void push(E element) {
         if (size == cap)
             reBuild(cap * 2 + 2);
@@ -55,12 +56,13 @@ public class Stack<E> implements Iterable<E> {
     }
 
     /**
-     * Pops the last element of this Stack.
+     * Pops the last element of this CArrayStack.
      *
-     * @return last element of this Stack
-     * @throws NoSuchElementException if the size of this Stack
+     * @return last element of this CArrayStack
+     * @throws NoSuchElementException if the size of this CArrayStack
      *         is empty
      */
+    @Override
     public E pop() {
         if (size == 0)
             throw new NoSuchElementException("There is no such elements");
@@ -72,10 +74,11 @@ public class Stack<E> implements Iterable<E> {
     }
 
     /**
-     * Returns <tt>true</tt> if this Stack contains no elements.
+     * Returns <tt>true</tt> if this CArrayStack contains no elements.
      *
-     * @return <tt>true</tt> if this Stack contains no elements
+     * @return <tt>true</tt> if this CArrayStack contains no elements
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -85,6 +88,7 @@ public class Stack<E> implements Iterable<E> {
      *
      * @return the amount of all elements
      */
+    @Override
     public int size() {
         return size;
     }
@@ -97,16 +101,6 @@ public class Stack<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new ReverseArrayIterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super E> action) {
-        throw new UnsupportedOperationException("This Method is not implemented");
-    }
-
-    @Override
-    public Spliterator<E> spliterator() {
-        return null;
     }
 
     private class ReverseArrayIterator implements Iterator<E> {

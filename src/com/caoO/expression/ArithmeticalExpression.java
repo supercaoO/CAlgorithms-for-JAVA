@@ -1,6 +1,6 @@
 package com.caoO.expression;
 
-import com.caoO.structrue.collection.Stack;
+import com.caoO.structrue.collection.CArrayStack;
 
 import java.util.ArrayList;
 
@@ -25,8 +25,8 @@ public class ArithmeticalExpression {
     }
 
     public static double evaluate_old(String expression) {
-        Stack<String> operations = new Stack<>();
-        Stack<Double> values = new Stack<>();
+        CArrayStack<String> operations = new CArrayStack<>();
+        CArrayStack<Double> values = new CArrayStack<>();
         String[] strs = expression.trim().split(" ");
         for (String str : strs) {
             if (ops.contains(str)) {
@@ -53,8 +53,8 @@ public class ArithmeticalExpression {
     }
 
     public static double evaluate(String expression) {
-        Stack<String> operations = new Stack<>();
-        Stack<Double> values = new Stack<>();
+        CArrayStack<String> operations = new CArrayStack<>();
+        CArrayStack<Double> values = new CArrayStack<>();
         String num = new String();
         for (int i = 0; i < expression.length(); i++) {
             String c = new String(new char[] { expression.charAt(i) });

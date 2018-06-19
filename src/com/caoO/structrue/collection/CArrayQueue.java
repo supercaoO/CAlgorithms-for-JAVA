@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  *
  * @param <E>
  */
-public class Queue<E> implements Iterable<E> {
+public class CArrayQueue<E> implements CQueue<E> {
 
     private Object[] elements;
 
@@ -27,7 +27,7 @@ public class Queue<E> implements Iterable<E> {
     /**
      * Constructs an empty Queue with an initial capacity of ten.
      */
-    public Queue() {
+    public CArrayQueue() {
         elements = new Object[DEFAULT_CAPACITY];
         cap = DEFAULT_CAPACITY;
     }
@@ -39,7 +39,7 @@ public class Queue<E> implements Iterable<E> {
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
      */
-    public Queue(int capacity) {
+    public CArrayQueue(int capacity) {
         cap = capacity;
         if (cap > 0)
             elements = new Object[capacity];
@@ -54,14 +54,14 @@ public class Queue<E> implements Iterable<E> {
      *
      * @param element element to be appended to this Queue
      */
-    public void enqueue(E element) {
+    @Override
+    public void push(E element) {
         if (size == cap)
             reBuild(cap * 2 + 2);
-        if (end == cap - 1)
+        if (end == cap)
             end = 0;
-        else
-            end++;
         elements[end] = element;
+        end++;
         size++;
     }
 
@@ -72,7 +72,8 @@ public class Queue<E> implements Iterable<E> {
      * @throws NoSuchElementException if the size of this Queue
      *         is empty
      */
-    public E dequeue() {
+    @Override
+    public E pop() {
         if (size == 0)
             throw new NoSuchElementException("There is no such elements");
         E element = (E) elements[beg];
@@ -93,10 +94,10 @@ public class Queue<E> implements Iterable<E> {
             System.arraycopy(elements, beg, newElements, 0, size);
         else {
             System.arraycopy(elements, beg, newElements, 0, cap - beg);
-            System.arraycopy(elements, beg, newElements, cap - beg, end + 1);
+            System.arraycopy(elements, beg, newElements, cap - beg, end);
         }
         beg = 0;
-        end = size - 1;
+        end = size;
         cap = newCap;
         elements = newElements;
     }
@@ -106,6 +107,7 @@ public class Queue<E> implements Iterable<E> {
      *
      * @return <tt>true</tt> if this Queue contains no elements
      */
+    @Override
     public boolean isEmpty() { return size == 0; }
 
     /**
@@ -113,21 +115,12 @@ public class Queue<E> implements Iterable<E> {
      *
      * @return the amount of all elements
      */
+    @Override
     public int size() { return size; }
 
     @Override
     public Iterator<E> iterator() {
         return new ArrayIterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super E> action) {
-        throw new UnsupportedOperationException("This Method is not implemented");
-    }
-
-    @Override
-    public Spliterator<E> spliterator() {
-        return null;
     }
 
     private class ArrayIterator implements Iterator<E> {

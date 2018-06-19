@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class Bag<E> implements Iterable<E> {
+public class CBag<E> implements CCollection<E> {
 
     private Object[] elements;
 
@@ -17,21 +17,21 @@ public class Bag<E> implements Iterable<E> {
     private final int DEFAULT_CAPACITY = 10;
 
     /**
-     * Constructs an empty Bag with an initial capacity of ten.
+     * Constructs an empty CBag with an initial capacity of ten.
      */
-    public Bag() {
+    public CBag() {
         elements = new Object[DEFAULT_CAPACITY];
         cap = DEFAULT_CAPACITY;
     }
 
     /**
-     * Constructs an empty Bag with the specified initial capacity.
+     * Constructs an empty CBag with the specified initial capacity.
      *
-     * @param  capacity  the initial capacity of the Bag
+     * @param  capacity  the initial capacity of the CBag
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
      */
-    public Bag(int capacity) {
+    public CBag(int capacity) {
         cap = capacity;
         if (cap > 0)
             elements = new Object[capacity];
@@ -42,13 +42,14 @@ public class Bag<E> implements Iterable<E> {
     }
 
     /**
-     * Appends the specified element to the end of this Bag.
+     * Appends the specified element to the end of this CBag.
      *
-     * @param element element to be appended to this Bag
+     * @param element element to be appended to this CBag
      */
     public void add(E element) {
         if (size == cap)
             reBuild();
+        elements[size++] = element;
     }
 
     private void reBuild() {
@@ -57,9 +58,9 @@ public class Bag<E> implements Iterable<E> {
     }
 
     /**
-     * Returns <tt>true</tt> if this Bag contains no elements.
+     * Returns <tt>true</tt> if this CBag contains no elements.
      *
-     * @return <tt>true</tt> if this Bag contains no elements
+     * @return <tt>true</tt> if this CBag contains no elements
      */
     public boolean isEmpty() { return size == 0; }
 
@@ -73,16 +74,6 @@ public class Bag<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new ArrayIterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super E> action) {
-        throw new UnsupportedOperationException("This method is not implemented");
-    }
-
-    @Override
-    public Spliterator<E> spliterator() {
-        return null;
     }
 
     private class ArrayIterator implements Iterator<E> {
